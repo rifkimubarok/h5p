@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<form method="POST" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdWoCWClSGTghJcRS0ZPpZlD6Ux2TfV5avJsilqiCv5lv3naQ/formResponse" id="form-google">
+  <div class="form-group row">
+    <label for="entry.378235672" class="col-4 col-form-label">Nama Lengkap</label> 
+    <div class="col-8">
+      <input id="entry.378235672" name="entry.378235672" type="text" class="form-control" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-4">Jabatan</label> 
+    <div class="col-8">
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="entry.1600316352" id="entry.1600316352_0" type="radio" class="custom-control-input" value="Guru" required="required"> 
+        <label for="entry.1600316352_0" class="custom-control-label">Guru</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="entry.1600316352" id="entry.1600316352_1" type="radio" class="custom-control-input" value="Mahasiswa" required="required"> 
+        <label for="entry.1600316352_1" class="custom-control-label">Mahasiswa</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="entry.1974055481" class="col-4 col-form-label">Jenjang</label> 
+    <div class="col-8">
+      <select id="entry.1974055481" name="entry.1974055481" class="custom-select" required="required">
+        <option value="SD">SD</option>
+        <option value="SMP">SMP</option>
+        <option value="SMA">SMA</option>
+        <option value="SMK">SMK</option>
+        <option value="Universitas">Universitas</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="entry.1028720287" class="col-4 col-form-label">Kabupaten/Kota</label> 
+    <div class="col-8">
+      <input id="entry.1028720287" name="entry.1028720287" type="text" class="form-control" required="required">
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-4 col-8">
+      <button name="submit" type="submit" class="btn btn-primary">Kirim</button>
+    </div>
+  </div>
+</form>
+
+<script>
+    $(document).ready(function(){
+        const form = $('#form-google');
+
+        form.submit(function(e){
+            e.preventDefault();
+            const url = form.attr("action");
+            $.ajax({
+                url:url,
+                type: "post",
+                dataType:"json",
+                data: form.serialize(),
+                success:function(result){
+                    console.log(result);
+                },
+                error:function(Xhr, status, t){
+
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>
