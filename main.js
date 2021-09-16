@@ -1,5 +1,5 @@
 function getbasepath() {
-  return "http://gtkdikdas.kemdikbud.go.id/sayembaravideo/public";
+  return "https://sayembara.webapps.my.id/api";
 }
 
 function request(url, type, data, callback) {
