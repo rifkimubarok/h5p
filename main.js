@@ -117,3 +117,25 @@ function getKelurahan(initialState, combobox, param, curent, single) {
     }
   });
 }
+
+const test = () => {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open(
+    "GET",
+    "http://gtkdikdas.kemdikbud.go.id/sayembaravideo/public/ajax/region/provinsi"
+  );
+  xhr.setRequestHeader(
+    "Cookie",
+    "XSRF-TOKEN=eyJpdiI6IjZUdFpYdGVhUm5MRjNGSnlWK0IvWUE9PSIsInZhbHVlIjoiWUkvQm40aUFMZ2gxbmtPc1VnOFRaV3pkQWxTSW1aM3B5OXZOdmJHMkxJNC9oWXhNam01ZTlTSno0bWhJM0R1akgyaTFLMm15OEM4ckNRUzNwQ1dDR0hSUW9lVjlXazZlN0IzTE5WVW9JZ2ZFSDFkc2g3dU0rZlhaU242NVZmeWsiLCJtYWMiOiI5M2IyZmUzNjQ3NmE0ZDA1OWE5NWFiMmIyMjQzYTgzOWQ5MmM5ZDMyZGM0MDNhMmM2MjMxNWM0N2Q2OThjODA4In0%3D; sayembara_video_session=eyJpdiI6InhZbjBNWVhGTENxZXdmUWtNQVk0SWc9PSIsInZhbHVlIjoiYWMya20vUmo2eU1PSTE0dWR2T3NXbHdFOGdaTUpCeFpRajV2RWdXUnJOQXF5dXg3OVd2aVRaOHNDYit5MUdkN1pxZjBBd1JYcER1QzdUektLWUN4R283RWY0N05Pb1RjNlowdGg1OXJZOEwzVXJsRTVmNXlUdVpWOWhRdWs2b1oiLCJtYWMiOiIyZmEzNzhlM2M4YTM0MGJjMWVjODBiMmI3NzM0OGU2YWI1OTg4ZjhhYTEyYTExMDJkOWI4MmQ2MDQ4ZjQ2NjFiIn0%3D"
+  );
+
+  xhr.send();
+};
