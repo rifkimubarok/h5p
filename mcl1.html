@@ -105,7 +105,15 @@
         provinsi.on("change", function(e){
             e.preventDefault();
             const id = provinsi.val();
+            const text = $( '#provinsi option:selected' ).text();
+            $('[name="entry.1060649005"]').val(text);
             getKabupaten("-- Pilih Kabupaten --", kabupaten, id);
+        })
+
+        kabupaten.on("change", function(e){
+            e.preventDefault();
+            const text = $( '#kabupaten option:selected' ).text();
+            $('[name="entry.1101652281"]').val(text);
         })
 
         $('[name="jenjang"]').on("click", function(e){
