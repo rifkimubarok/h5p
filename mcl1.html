@@ -10,10 +10,16 @@
 </head>
 <body>
     <div class="container px-5 my-5">
-    <div class="card mb-3">
+    <div class="card mb-3" id="beforeSend">
         <div class="card-header">
             <h2>Check-in Microlearning</h2>
             <span class="text-danger">* Wajib</span>
+        </div>
+    </div>
+    <div class="card mb-3" id="afterSend" style="display: none;">
+        <div class="card-header">
+            <h2>Check-in Microlearning</h2>
+            <p>Anda telah berhasil check-in pada microlearning.<br>Selamat Belajar!</p>
         </div>
     </div>
     <form id="contactForm" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfNlj9Q8bvd1x5PZY7u-TdOobxD1jtfXBWjfc4BJGrZ0tj2yQ/formResponse" data-sb-form-api-token="API_TOKEN">
@@ -54,13 +60,15 @@
             <div class="invalid-feedback" data-sb-feedback="jenjang:required">One option is required.</div>
         </div>
         <div class="form-floating mb-3">
-            <select class="form-select" name="entry.1060649005" id="provinsi" aria-label="Provinsi" required>
+            <input type="hidden" name="entry.1060649005">
+            <select class="form-select" id="provinsi" aria-label="Provinsi" required>
                 <option value="">-- Pilih Provinsi --</option>
             </select>
             <label for="provinsi">Provinsi <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-3">
-            <select class="form-select" name="entry.1101652281" id="kabupaten" aria-label="Kabupaten" required>
+            <input type="hidden" name="entry.1101652281">
+            <select class="form-select" id="kabupaten" aria-label="Kabupaten" required>
                 <option value="">-- Pilih Kabupaten --</option>
             </select>
             <label for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
@@ -125,6 +133,33 @@
             e.preventDefault();
             const val = $(this).val();
             $('#jenjang').val(val);
+        })
+
+        const form = $('#contactForm');
+
+        form.submit(function(e){
+            e.preventDefault();
+            const url = form.attr("action");
+            try {
+                $.ajax({
+                    url:url,
+                    type: "post",
+                    dataType:"json",
+                    data: form.serialize(),
+                    success:function(result){
+                        console.log(result);
+                    },
+                    error:function(Xhr, status, t){
+
+                    }
+                })
+                $('#beforeSend').hide();
+                $('#afterSend').show();
+                form.hide();
+            } catch (error) {
+                $('#beforeSend').hide();
+                $('#afterSend').show();
+            }
         })
     })
 </script>
