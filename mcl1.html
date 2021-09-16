@@ -98,7 +98,9 @@
     $(document).ready(function(){
         const provinsi = $('#provinsi');
         const kabupaten = $('#kabupaten');
-        const url = window.location.href;
+        const url = (window.location != window.parent.location)
+            ? document.referrer
+            : document.location.href;
         $('#judul-mcl').val(url);
 
         getProvinsi("-- Pilih Provinsi --", provinsi);
