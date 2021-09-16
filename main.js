@@ -33,10 +33,10 @@ function request(url, type, data, callback) {
   });
 }
 
-function getProvinsi(initialState, combobox, param, curent) {
+function getProvinsi(initialState, combobox, curent) {
   let option =
     initialState != false ? `<option value="">${initialState}</option>` : "";
-  const url = getbasepath() + `/ajax/region/provinsi/${param}`;
+  const url = getbasepath() + `/ajax/region/provinsi`;
   request(url, "get", null, function (result) {
     if (result.success) {
       const { data } = result;
