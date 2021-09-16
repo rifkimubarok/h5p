@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container px-5 my-5">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2>Check-in Microlearning</h2>
+            <span class="text-danger">* Wajib</span>
+        </div>
+    </div>
+    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+        <input type="hidden" name="entry.864480747">
+        <div class="form-floating mb-3">
+            <input class="form-control" id="namaLengkap" name="entry.90431255" type="text" placeholder="Nama Lengkap" data-sb-validations="required" />
+            <label for="namaLengkap">Nama Lengkap <span class="text-danger">*</span></label>
+            <div class="invalid-feedback" data-sb-feedback="namaLengkap:required">Nama Lengkap is required.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" id="nuptkNik" name="entry.1424498314" type="text" placeholder="NUPTK/NIK" data-sb-validations="required" />
+            <label for="nuptkNik">NUPTK/NIK <span class="text-danger">*</span></label>
+            <div class="invalid-feedback" data-sb-feedback="nuptkNik:required">NUPTK/NIK is required.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" name="entry.70268116" id="jabatan" aria-label="Jabatan">
+                <option value="Guru">Guru</option>
+                <option value="Mahasiswa">Mahasiswa</option>
+                <option value="Pendidikan Lainnya">Pendidikan Lainnya</option>
+            </select>
+            <label for="jabatan">Jabatan <span class="text-danger">*</span></label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label d-block">Jenjang <span class="text-danger">*</span></label>
+            <input type="hidden" name="entry.1601387417">
+            <div class="form-check">
+                <input class="form-check-input" id="sdMi" type="radio" name="jenjang" data-sb-validations="required" />
+                <label class="form-check-label" for="sdMi">SD/MI</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" id="smpMts" type="radio" name="jenjang" data-sb-validations="required" />
+                <label class="form-check-label" for="smpMts">SMP/MTS</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" id="yangLain" type="radio" name="jenjang" data-sb-validations="required" />
+                <label class="form-check-label" for="yangLain">Yang lain:</label>
+            </div>
+            <div class="invalid-feedback" data-sb-feedback="jenjang:required">One option is required.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" name="entry.1060649005" id="provinsi" aria-label="Provinsi">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <label for="provinsi">Provinsi <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" name="entry.1101652281" id="kabupaten" aria-label="Kabupaten">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <label for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
+        </div>
+        <div class="d-none" id="submitSuccessMessage">
+            <div class="text-center mb-3">
+                <div class="fw-bolder">Form submission successful!</div>
+                <p>To activate this form, sign up at</p>
+                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+            </div>
+        </div>
+        <div class="d-none" id="submitErrorMessage">
+            <div class="text-center text-danger mb-3">Error sending message!</div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Kirim</button>
+        </div>
+        <div class="d-grid">
+            <a href="#" id="clear">Kosongkan formulir</a>
+        </div>
+    </form>
+</div>
+<!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="./main.js"></script>
+<script>
+    $(document).ready(function(){
+        const otherValue = `<input type="hidden" name="entry.1601387417.other_option_response" value="$value$">`;
+        const value = '__other_option__';
+    })
+</script>
+</body>
+</html>
