@@ -22,7 +22,7 @@
             <p>Anda telah berhasil check-in pada microlearning.<br>Selamat Belajar!</p>
         </div>
     </div>
-    <form id="contactForm" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfNlj9Q8bvd1x5PZY7u-TdOobxD1jtfXBWjfc4BJGrZ0tj2yQ/formResponse" data-sb-form-api-token="API_TOKEN">
+    <form id="contactForm" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfNlj9Q8bvd1x5PZY7u-TdOobxD1jtfXBWjfc4BJGrZ0tj2yQ/formResponse" data-sb-form-api-token="API_TOKEN" method="POST">
         <input type="hidden" name="entry.864480747" id="judul-mcl" value="Judul MCL">
         <input type="hidden" name="entry.1601387417" id="jenjang">
         <div class="form-floating mb-3">
@@ -98,10 +98,18 @@
     $(document).ready(function(){
         const provinsi = $('#provinsi');
         const kabupaten = $('#kabupaten');
-        const url = (window.location != window.parent.location)
+        let url = (window.location != window.parent.location)
             ? document.referrer
             : document.location.href;
+        if(document.location.href.includes("mcl-title")){
+            const uriArr = document.location.href.split("mcl-title=");
+            if(uriArr.length > 1){
+                url = decodeURIComponent(uriArr[1]);
+            }
+        }
+        console.log(url);
         $('#judul-mcl').val(url);
+        console.log(document.referrer)
 
         getProvinsi("-- Pilih Provinsi --", provinsi);
         provinsi.on("change", function(e){
