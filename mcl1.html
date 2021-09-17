@@ -131,8 +131,10 @@
             if(valJenjang.includes("other")){
                 $('#jenjang').val($('#other-value').val());
                 $('#other-value').focus();
+                $('#other-value').attr("required", true);
             }else{
                 $('#jenjang').val(valJenjang);
+                $('#other-value').attr("required", false);
             }
         })
 
@@ -178,6 +180,10 @@
                 $('#beforeSend').hide();
                 $('#afterSend').show();
             }
+        })
+
+        $('#clear').click(function(e){
+            form.trigger("reset");
         })
     })
 </script>
