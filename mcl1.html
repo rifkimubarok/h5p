@@ -94,10 +94,18 @@
 <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="./main.js"></script>
+<script src="./localstorage.js"></script>
 <script>
     $(document).ready(function(){
         const provinsi = $('#provinsi');
         const kabupaten = $('#kabupaten');
+        const namaLengkap = $('#namaLengkap');
+        const nuptk = $('#nuptkNik');
+        const jabatan = $('#jabatan');
+        const jenjang = $('[name="jenjang"]');
+        const otherValue = $('#other-value');
+        const judulMcl = $('#judul-mcl');
+
         let url = (window.location != window.parent.location)
             ? document.referrer
             : document.location.href;
@@ -107,9 +115,9 @@
                 url = decodeURIComponent(uriArr[1]);
             }
         }
-        console.log(url);
         $('#judul-mcl').val(url);
-        console.log(document.referrer)
+        const sessionName = `session-${url}`;
+
 
         getProvinsi("-- Pilih Provinsi --", provinsi);
         provinsi.on("change", function(e){
@@ -155,6 +163,18 @@
             $('#jenjang').val(val);
         })
 
+        const data = () => {
+            return {
+                namaLengkap: namaLengkap.val(),
+                nuptkNik: nuptk.val(),
+                jabatan: jabatan.val(),
+                jenjang: jenjang.val(),
+                otherVal: otherValue.val(),
+                provinsi: $('#provinsi option:selected').text(),
+                kabupaten: $('#kabupaten option:selected').text()
+            }
+        }
+
         const form = $('#contactForm');
 
         form.submit(function(e){
@@ -176,6 +196,7 @@
                 $('#beforeSend').hide();
                 $('#afterSend').show();
                 form.hide();
+                setItem(sessionName, data());
             } catch (error) {
                 $('#beforeSend').hide();
                 $('#afterSend').show();

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container px-5 my-5">
+    <div class="card mb-3" id="beforeSend">
+        <div class="card-header">
+            <h2>Check-out Microlearning</h2>
+            <span class="text-danger">* Wajib</span>
+        </div>
+    </div>
+    <div class="card mb-3" id="afterSend" style="display: none;">
+        <div class="card-header">
+            <h2>Check-out Microlearning</h2>
+            <p>Anda telah berhasil check-out pada microlearning.<br>Terimakasih!</p>
+        </div>
+    </div>
+    <div class="card mb-3" id="notCheckin" style="display: none;">
+        <div class="card-header">
+            <h2>Check-out Microlearning</h2>
+            <p class="text-danger">Anda terdeteksi belum melakukan checkin Microlearning ini.</p>
+        </div>
+    </div>
+    <form id="contactForm" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfD6-G9Ae9ZYRYLOc6__FoGh1FdG5jp6b3rNi8ozP8_Y13nKw/formResponse?embedded=true" data-sb-form-api-token="API_TOKEN" method="POST">
+        
+        <input type="hidden" name="entry.864480747" id="judul-mcl" value="Judul MCL">
+        <input type="hidden" name="entry.1601387417" id="jenjang">
+        <input type="hidden" name="entry.90431255" id="namaLengkap">
+        <input type="hidden" name="entry.1424498314" id="nuptkNik">
+        <input type="hidden" name="entry.70268116" id="jabatan">
+        <input type="hidden" name="entry.1060649005" id="provinsi">
+        <input type="hidden" name="entry.1101652281" id="kabupaten">
+        <input type="hidden" name="entry.2030743545" id="tuntas">
+        
+        <div class="mb-3">
+            <label class="form-label d-block">Apakah Anda sudah menyelesaikan microlearning ini? <span class="text-danger">*</span></label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="ya" type="radio" name="tuntas" value="Ya" data-sb-validations="required" required />
+                <label class="form-check-label" for="ya">Ya</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="tidak" type="radio" name="tuntas" value="Tidak" data-sb-validations="required" required />
+                <label class="form-check-label" for="tidak">Tidak</label>
+            </div>
+        </div>
+        <div class="form-floating mb-3" id="alasan-input" style="display: none;">
+            <textarea class="form-control" id="alasan" name="entry.1486947890" type="text" placeholder="Mengapa tidak menyelesaikan?" style="height: 10rem;" data-sb-validations="required"></textarea>
+            <label for="mengapaTidakMenyelesaikan">Mengapa tidak menyelesaikan? <span class="text-danger">*</span></label>
+            <div class="invalid-feedback" data-sb-feedback="mengapaTidakMenyelesaikan:required">Mengapa tidak menyelesaikan? is required.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" name="entry.1777698157" id="saran" type="text" placeholder="Saran dan masukan pada microlearning ini!" style="height: 10rem;" data-sb-validations="required"></textarea>
+            <label for="saranDanMasukanPadaMicrolearningIni">Saran dan masukan pada microlearning ini!</label>
+            <div class="invalid-feedback" data-sb-feedback="saranDanMasukanPadaMicrolearningIni:required">Saran dan masukan pada microlearning ini! is required.</div>
+        </div>
+        
+        <div class="d-none" id="submitSuccessMessage">
+            <div class="text-center mb-3">
+                <div class="fw-bolder">Form submission successful!</div>
+                <p>To activate this form, sign up at</p>
+                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+            </div>
+        </div>
+        <div class="d-none" id="submitErrorMessage">
+            <div class="text-center text-danger mb-3">Error sending message!</div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Kirim</button>
+        </div>
+    </form>
+</div>
+<!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="./main.js"></script>
+<script src="./localstorage.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        const provinsi = $('#provinsi');
+        const kabupaten = $('#kabupaten');
+        const namaLengkap = $('#namaLengkap');
+        const nuptk = $('#nuptkNik');
+        const jabatan = $('#jabatan');
+        const jenjang = $('[name="jenjang"]');
+        const otherValue = $('#other-value');
+        const judulMcl = $('#judul-mcl');
+        
+        let url = (window.location != window.parent.location)
+            ? document.referrer
+            : document.location.href;
+        if(document.location.href.includes("mcl-title")){
+            const uriArr = document.location.href.split("mcl-title=");
+            if(uriArr.length > 1){
+                url = decodeURIComponent(uriArr[1]);
+            }
+        }
+        $('#judul-mcl').val(url);
+        const sessionName = `session-${url}`;
+
+        const data = getItem(sessionName);
+        if(data != null ){
+            for(const [key, value] of Object.entries(data)){
+                $(`#${key}`).val(value);
+            }
+            if(data.hasOwnProperty("isCheckout")){
+                $('#contactForm').hide();
+                $('#afterSend').show();
+                $('#beforeSend').hide();
+            }
+        }else{
+            $('#notCheckin').show();
+            $('#beforeSend').hide();
+            $('#afterSend').hide();
+            $('#contactForm').hide();
+        }
+        
+        $('[name="tuntas"]').on("click", function(e){
+            const valTuntas = $(this).val();
+            $('#tuntas').val(valTuntas);
+            if(valTuntas.includes("Tidak")){
+                $('#alasan-input').show();
+                $('#alasan-input').prop("required", true);
+            }else{
+                $('#alasan-input').hide();
+                $('#alasan-input').prop("required", false);
+            }
+        })
+
+        const form = $('#contactForm');
+
+        form.submit(function(e){
+            e.preventDefault();
+            const url = form.attr("action");
+            try {
+                $.ajax({
+                    url:url,
+                    type: "post",
+                    dataType:"json",
+                    data: form.serialize(),
+                    success:function(result){
+                        console.log(result);
+                    },
+                    error:function(Xhr, status, t){
+
+                    }
+                })
+                $('#beforeSend').hide();
+                $('#afterSend').show();
+                form.hide();
+                
+                let checkoutData = data;
+                checkoutData.isCheckout = true;
+                setItem(sessionName, checkoutData);
+            } catch (error) {
+                $('#beforeSend').hide();
+                $('#afterSend').show();
+            }
+        })
+    })
+</script>
+</body>
+</html>
