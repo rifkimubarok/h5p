@@ -22,6 +22,14 @@
             <p>Anda telah berhasil check-in pada microlearning.<br>Selamat Belajar!</p>
         </div>
     </div>
+    <div class="card mb-3" id="wasSubmit" style="display: none;">
+        <div class="card-header">
+            <h2>Check-in Microlearning</h2>
+            <p>Anda telah melakukan check-in pada microlearning ini.<br><br>
+                Untuk menggunakan data yang berbeda gunakan tautan berikut: 
+                 <a href="#" id="checkinBack">Check-in kembali.</a></p>
+        </div>
+    </div>
     <form id="contactForm" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfNlj9Q8bvd1x5PZY7u-TdOobxD1jtfXBWjfc4BJGrZ0tj2yQ/formResponse" data-sb-form-api-token="API_TOKEN" method="POST">
         <input type="hidden" name="entry.864480747" id="judul-mcl" value="Judul MCL">
         <input type="hidden" name="entry.1601387417" id="jenjang">
@@ -118,6 +126,20 @@
         $('#judul-mcl').val(url);
         const sessionName = `session-${url}`;
 
+        const sessionData = getItem(sessionName);
+        if(sessionData != null){
+            $('#beforeSend').hide();
+            $('#wasSubmit').show();
+            $('#contactForm').hide();
+            console.log(sessionData)
+        }
+
+        $('#checkinBack').click(function(e){
+            e.preventDefault();
+            $('#beforeSend').show();
+            $('#wasSubmit').hide();
+            $('#contactForm').show();
+        })
 
         getProvinsi("-- Pilih Provinsi --", provinsi);
         provinsi.on("change", function(e){

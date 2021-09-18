@@ -104,7 +104,32 @@
         $('#judul-mcl').val(url);
         const sessionName = `session-${url}`;
 
-        const data = getItem(sessionName);
+        let data = getItem(sessionName);
+
+        const checkWasChecking = setInterval(function(){
+            data = getItem(sessionName);
+            if(data != null ){
+                for(const [key, value] of Object.entries(data)){
+                    $(`#${key}`).val(value);
+                }
+                if(data.hasOwnProperty("isCheckout")){
+                    $('#contactForm').hide();
+                    $('#afterSend').show();
+                    $('#beforeSend').hide();
+                }else{
+                    $('#notCheckin').hide();
+                    $('#beforeSend').show();
+                    $('#afterSend').hide();
+                    $('#contactForm').show();
+                }
+            }else{
+                $('#notCheckin').show();
+                $('#beforeSend').hide();
+                $('#afterSend').hide();
+                $('#contactForm').hide();
+            }
+        }, 5000);
+
         if(data != null ){
             for(const [key, value] of Object.entries(data)){
                 $(`#${key}`).val(value);
@@ -113,6 +138,11 @@
                 $('#contactForm').hide();
                 $('#afterSend').show();
                 $('#beforeSend').hide();
+            }else{
+                $('#notCheckin').hide();
+                $('#beforeSend').show();
+                $('#afterSend').hide();
+                $('#contactForm').show();
             }
         }else{
             $('#notCheckin').show();
